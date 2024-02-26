@@ -1,9 +1,11 @@
 import Test from "./Test";
+import Todo from "./Todo";
 
 function App() {
   return (
     <>
-      <Test />
+      {/* <Test /> */}
+      <Todo />
     </>
   );
 }
