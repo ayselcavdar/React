@@ -1,19 +1,39 @@
-import { useEffect } from "react";
-import { PostService, UserService } from "./services";
+import { Route, Routes, Link, NavLink } from "react-router-dom";
+import Home from "./pages/Home";
+import Contact from "./pages/Contact";
+import Blog from "./pages/Blog";
 
 function App() {
-  useEffect(() => {
-    PostService.getPosts().then((res) => console.log(res));
-    PostService.getPostDetails(2).then((res) => console.log(res));
-    PostService.newPost({
-      userId: 3,
-      title: "test",
-      body: "test",
-    }).then((res) => console.log(res));
-    UserService.getUsers();
-  }, []);
-
-  return <>App</>;
+  return (
+    <>
+      <nav>
+        <NavLink to="/" className={({ isActive }) => isActive && "aktif"}>
+          Home
+        </NavLink>
+        <NavLink
+          to="/contact"
+          style={({ isActive }) => ({
+            backgroundColor: isActive ? "red" : "transparent",
+          })}
+        >
+          Contact
+        </NavLink>
+        <NavLink to="/blog">
+          {({ isActive }) => (
+            <>
+              Blog
+              {isActive && "(Aktif)"}
+            </>
+          )}
+        </NavLink>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/blog" element={<Blog />} />
+      </Routes>
+    </>
+  );
 }
 
 export default App;
